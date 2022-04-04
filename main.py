@@ -71,7 +71,6 @@ holding_mins = input("Enter minutes holding fuel at alternate: ")
 fuel_onboard = input("Enter current fuel onboard: ")
 dist_from_syd = input("Current distance from SYD: ")
 
-
 fuel_adj = ((float(dist_from_syd) / (212 + wind_cont)) * 1086) - 190
 fixed_res = 500
 holding_fuel = round(int(holding_mins) * 14.1666667)
