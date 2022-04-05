@@ -1,6 +1,6 @@
 from math import cos, sqrt, radians, floor
 
-alt_airport = input("Enter alternate airport: ")
+alt_airport = input("Nominated alternate airport: ")
 
 # WIND SPEED AND DIRECTION
 wind_direction = input("Wind direction at 10,000: ")
@@ -37,7 +37,7 @@ elif alt_airport == 'ntl' or alt_airport == 'wlm':
 elif alt_airport == 'tmw':
     track_to_divert = 258
     dist_to_alt = 173
-    track_diff = 77  ######### Written as an 83 degree variation in FCOM but its 77
+    track_diff = 77  ######### Written as an 83 degree variation in FCOM but it should be 77
     tas = 212
     fuel_flow = 1086
 elif alt_airport == 'bne':
@@ -50,6 +50,12 @@ elif alt_airport == 'bnk' or alt_airport == 'bna':
     track_to_divert = 284
     dist_to_alt = 330
     track_diff = 50
+    tas = 211
+    fuel_flow = 1025
+elif alt_airport == 'syd':  # trialling sydney for a PSD as it's been discussed in flight many times
+    track_to_divert = 360
+    dist_to_alt = 0
+    track_diff = 0
     tas = 211
     fuel_flow = 1025
 else:  # if its YBCG
@@ -66,9 +72,8 @@ wind_to_divert = round(-(cos(divert_rads) * windspeed))
 wind_divert = int(wind_to_divert)
 wind_cont = int(wind_to_continue)
 
-################### NEED TO HAVE THE FORMULA FOR THE FUEL ADJ TABLE HERE ##########################################
-holding_mins = input("Enter minutes holding fuel at alternate: ")
-fuel_onboard = input("Enter current fuel onboard: ")
+holding_mins = input("Minutes holding required at alternate: ")
+fuel_onboard = input("Current fuel onboard: ")
 dist_from_syd = input("Current distance from SYD: ")
 
 fuel_adj = ((float(dist_from_syd) / (212 + wind_cont)) * 1086) - 190
@@ -92,4 +97,4 @@ else:
                     track_diff / 57.3))) / 2 / ((fuel_flow / (tas + wind_divert)) ** 2 - (fuel_flow / (tas + wind_cont)
                                                                                           ) ** 2)
 
-print('PSD SYD is', round(psd))
+print('The point of safe diversion is', str(round(psd)) + 'nm from SYD')
